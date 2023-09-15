@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quote-generator</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <div class="body">
+        <div class="container1">
+
+            <h1>Quote of the Day</h1>
+            <img src="img.png" alt="here" class="image" id="i">
+            <div id="quote">
+                    Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Eius, vitae. Quibusdam quo excepturi soluta quam consequatur in repellendus consectetur iure
+                    totam 
+            </div>
+            <img src="img1.png" alt="here" class="image" id="i1">
+
+           
+            <div id="author">
+                J.K.Rowlin
+            </div>
+
+            <hr>
+
+            <button id="newQ">
+                New Quote
+            </button>
+            <div class="buttons">
+                <a href="#" id="tweet" ><img src="twitter.png" alt="twitt" class="imag" id="i2"></a>
+                <img src="share.png" alt="share" class="imag" id="i3">
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script>
+        
+        const quote=document.getElementById('quote')
+        const author=document.getElementById('author');
+        const newQ=document.getElementById('newQ');
+        const tweet=document.getElementById('tweet')
+        let real=""
+        let quotesdata=''
+        const getnewquote=()=>{
+         const num= Math.floor(Math.random()*17)
+         let quotesdata=real[num]
+         quote.innerText=`${quotesdata.text}`;
+         author.innerText=`${real[num].author}`
+         console.log(num);
+
+        }
+
+        
+
+const getQuotes=async()=>{
+    const api="https://type.fit/api/quotes";
+
+    try {
+        let data=await fetch(api);
+        real=await data.json();
+       getnewquote();
+    } catch (error) {
+        
+    }
+
+}
+const tweetnow=()=>{
+            let intent=`https://twitter.com/intent/tweet` 
+            window.open(intent);
+        }
+newQ.addEventListener("click",getnewquote);
+tweet.addEventListener("click",tweetnow);
+
+getQuotes();
+
+
+
+
+    </script>
+
+</body>
+
+</html>
